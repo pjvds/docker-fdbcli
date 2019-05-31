@@ -26,7 +26,7 @@ RUN apt-get update && \
 	rm -r /var/lib/apt/lists/*
 
 # Install FoundationDB Binaries
-ARG FDB_VERSION
+ARG FDB_VERSION=6.1.8
 ARG FDB_WEBSITE=https://www.foundationdb.org
 
 WORKDIR /var/fdb/tmp
@@ -40,4 +40,4 @@ RUN curl $FDB_WEBSITE/downloads/$FDB_VERSION/linux/fdb_$FDB_VERSION.tar.gz -o fd
 COPY fdbcli.bash /fdb/scripts/
 RUN chmod u+x /fdb/scripts/fdbcli.bash
 
-CMD /fdb/scripts/fdbcli.bash
+ENTRYPOINT ["/fdb/scripts/fdbcli.bash"]
